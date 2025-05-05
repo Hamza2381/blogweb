@@ -1,0 +1,780 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Insight Blog - Home</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .hero-bg {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1486312338219-ce68d2c6f44d');
+            background-size: cover;
+            background-position: center;
+        }
+
+        .card {
+            transition: all 0.3s ease;
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+        }
+
+        .scroll-reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 1s ease;
+        }
+
+        .scroll-reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .category-tag {
+            transition: all 0.3s ease;
+        }
+
+        .category-tag:hover {
+            transform: scale(1.05);
+        }
+
+        .newsletter-section {
+            background: linear-gradient(90deg, #3498db, #9b59b6);
+        }
+
+        #featured-slider {
+            overflow: hidden;
+            position: relative;
+        }
+
+        .slider-container {
+            display: flex;
+            transition: transform 0.5s ease;
+        }
+
+        .slider-item {
+            min-width: 100%;
+        }
+
+        .progress-bar {
+            height: 4px;
+            background: #e2e8f0;
+            width: 100%;
+            position: relative;
+        }
+
+        .progress {
+            height: 100%;
+            background: #3b82f6;
+            width: 0;
+            transition: width 0.3s ease;
+        }
+    </style>
+    <script>
+        // Slider Functionality
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-4');
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 500) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Featured Slider
+            const sliderContainer = document.querySelector('.slider-container');
+            const sliderItems = document.querySelectorAll('.slider-item');
+            const prevButton = document.querySelector('.slider-prev');
+            const nextButton = document.querySelector('.slider-next');
+            const progressBar = document.getElementById('slider-progress');
+
+            let currentIndex = 0;
+            const itemCount = sliderItems.length;
+
+            // Set initial progress
+            updateProgress();
+
+            // Auto slide timer
+            let slideInterval = setInterval(nextSlide, 5000);
+
+            function updateProgress() {
+                const progressWidth = ((currentIndex + 1) / itemCount) * 100;
+                progressBar.style.width = progressWidth + '%';
+            }
+
+            function moveSlider() {
+                const itemWidth = sliderItems[0].offsetWidth;
+                sliderContainer.style.transform = `translateX(-${currentIndex * itemWidth}px)`;
+                updateProgress();
+
+                // Reset timer
+                clearInterval(slideInterval);
+                slideInterval = setInterval(nextSlide, 5000);
+            }
+
+            function nextSlide() {
+                currentIndex = (currentIndex + 1) % itemCount;
+                moveSlider();
+            }
+
+            function prevSlide() {
+                currentIndex = (currentIndex - 1 + itemCount) % itemCount;
+                moveSlider();
+            }
+
+            nextButton.addEventListener('click', nextSlide);
+            prevButton.addEventListener('click', prevSlide);
+
+            // Scroll Reveal Animation
+            const scrollRevealElements = document.querySelectorAll('.scroll-reveal');
+
+            function checkScroll() {
+                scrollRevealElements.forEach(element => {
+                    const elementTop = element.getBoundingClientRect().top;
+                    const windowHeight = window.innerHeight;
+
+                    if (elementTop < windowHeight - 100) {
+                        element.classList.add('active');
+                    }
+                });
+            }
+
+            window.addEventListener('scroll', checkScroll);
+            checkScroll(); // Check on load
+
+            // Initialize GSAP animations
+            gsap.registerPlugin(ScrollTrigger);
+
+            gsap.from('.category-tag', {
+                scrollTrigger: {
+                    trigger: '#categories',
+                    start: 'top 70%'
+                },
+                opacity: 0,
+                y: 50,
+                stagger: 0.1,
+                duration: 0.8,
+                ease: 'power3.out'
+            });
+
+            gsap.from('.card', {
+                scrollTrigger: {
+                    trigger: '#latest',
+                    start: 'top 60%'
+                },
+                opacity: 0,
+                y: 30,
+                stagger: 0.15,
+                duration: 0.8,
+                ease: 'back.out(1.2)'
+            });
+        });
+    </script>
+</head>
+
+<body class="bg-gray-50 min-h-screen flex flex-col">
+    <div class="flex-grow">
+        <!-- Header & Navigation -->
+        <header id="navbar" class="fixed top-0 w-full bg-white shadow-md z-50 transition-all duration-300">
+            <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+                <a href="index-html.html" class="text-3xl font-bold text-blue-600 flex items-center">
+                    <i class="fas fa-feather-alt mr-2"></i>
+                    <span>Insight</span>
+                </a>
+                <nav class="hidden md:flex space-x-8">
+                    <a href="index.html" class="text-gray-800 hover:text-blue-600 font-medium">Home</a>
+                    <a href="#featured" class="text-gray-800 hover:text-blue-600 font-medium">Featured</a>
+                    <a href="#categories" class="text-gray-800 hover:text-blue-600 font-medium">Categories</a>
+                    <a href="about-html.html" class="text-gray-800 hover:text-blue-600 font-medium">About Us</a>
+                    <a href="contact-html.html" class="text-gray-800 hover:text-blue-600 font-medium">Contact</a>
+                </nav>
+                <div class="hidden md:block relative">
+                    <input type="text" placeholder="Search articles..."
+                        class="py-2 px-4 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm w-64">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+                <button id="menu-toggle" class="md:hidden focus:outline-none">
+                    <i class="fas fa-bars text-2xl text-gray-800"></i>
+                </button>
+            </div>
+            <!-- Mobile Menu -->
+            <div id="mobile-menu" class="md:hidden bg-white shadow-inner py-4 px-4 hidden">
+                <div class="flex flex-col space-y-4">
+                    <a href="index-html.html" class="text-gray-800 hover:text-blue-600 font-medium">Home</a>
+                    <a href="#featured" class="text-gray-800 hover:text-blue-600 font-medium">Featured</a>
+                    <a href="#categories" class="text-gray-800 hover:text-blue-600 font-medium">Categories</a>
+                    <a href="about-html.html" class="text-gray-800 hover:text-blue-600 font-medium">About Us</a>
+                    <a href="contact-html.html" class="text-gray-800 hover:text-blue-600 font-medium">Contact</a>
+                    <div class="relative mt-2">
+                        <input type="text" placeholder="Search articles..."
+                            class="py-2 px-4 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm w-full">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <button class="md:hidden focus:outline-none" id="menu-toggle">
+            <i class="fas fa-bars text-2xl text-gray-800"></i>
+        </button>
+
+        <!-- Hero Section -->
+        <section class="hero-bg h-screen flex items-center justify-center">
+            <div class="container mx-auto px-4 text-center">
+                <h1 class="text-5xl md:text-7xl font-bold text-white mb-6 animate__animated animate__fadeInDown">
+                    Discover Powerful Insights
+                </h1>
+                <p
+                    class="text-xl md:text-2xl text-gray-200 mb-10 max-w-3xl mx-auto animate__animated animate__fadeIn animate__delay-1s">
+                    Engaging stories, expert advice, and thought-provoking ideas to inspire your journey.
+                </p>
+                <div class="animate__animated animate__fadeInUp animate__delay-1s">
+                    <a href="#latest"
+                        class="bg-blue-600 hover:bg-blue-700 text-white font-bold py-3 px-8 rounded-full shadow-lg transition-all duration-300 inline-block">
+                        Start Reading
+                    </a>
+                </div>
+                <div
+                    class="absolute bottom-10 left-1/2 transform -translate-x-1/2 animate__animated animate__bounce animate__infinite animate__slow">
+                    <i class="fas fa-chevron-down text-white text-2xl"></i>
+                </div>
+            </div>
+        </section>
+
+        <!-- Featured Post Slider -->
+        <section id="featured" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Featured Articles</h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    Explore our most impactful and thought-provoking content, handpicked by our editors.
+                </p>
+
+                <div id="featured-slider" class="relative max-w-5xl mx-auto rounded-xl shadow-xl overflow-hidden">
+                    <div class="slider-container">
+                        <!-- Slider Item 1 -->
+                        <div class="slider-item">
+                            <div class="relative h-96">
+                                <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                                    alt="AI Revolution" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-8 flex flex-col justify-end">
+                                    <h3 class="text-white text-3xl font-bold mb-2">The AI Revolution: How Machine
+                                        Learning
+                                        is Transforming Our Future</h3>
+                                    <p class="text-gray-200 mb-4">Discover the profound impact of artificial
+                                        intelligence on
+                                        industries worldwide and what it means for humanity.</p>
+                                    <a href="article1-html.html"
+                                        class="text-white font-medium flex items-center hover:underline">
+                                        Read More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider Item 2 -->
+                        <div class="slider-item">
+                            <div class="relative h-96">
+                                <img src="https://images.unsplash.com/photo-1484627147104-f5197bcd6651?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                                    alt="Mindfulness Practice" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-8 flex flex-col justify-end">
+                                    <h3 class="text-white text-3xl font-bold mb-2">The Science of Mindfulness: How Daily
+                                        Practice Changes Your Brain</h3>
+                                    <p class="text-gray-200 mb-4">Explore the neuroscience behind meditation and how
+                                        incorporating mindfulness can transform your mental health.</p>
+                                    <a href="article1-html.html"
+                                        class="text-white font-medium flex items-center hover:underline">
+                                        Read More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Slider Item 3 -->
+                        <div class="slider-item">
+                            <div class="relative h-96">
+                                <img src="https://images.unsplash.com/photo-1434626881859-194d67b2b86f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                                    alt="Sustainable Living" class="w-full h-full object-cover">
+                                <div
+                                    class="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent p-8 flex flex-col justify-end">
+                                    <h3 class="text-white text-3xl font-bold mb-2">Sustainable Living: Small Changes
+                                        That
+                                        Make a Big Difference</h3>
+                                    <p class="text-gray-200 mb-4">Learn practical ways to reduce your environmental
+                                        footprint without sacrificing quality of life.</p>
+                                    <a href="article1-html.html"
+                                        class="text-white font-medium flex items-center hover:underline">
+                                        Read More <i class="fas fa-arrow-right ml-2"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Slider Navigation -->
+                    <div class="absolute top-1/2 -translate-y-1/2 w-full flex justify-between px-4">
+                        <button
+                            class="slider-prev bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg focus:outline-none">
+                            <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button
+                            class="slider-next bg-white text-gray-800 rounded-full w-10 h-10 flex items-center justify-center shadow-lg focus:outline-none">
+                            <i class="fas fa-chevron-right"></i>
+                        </button>
+                    </div>
+
+                    <!-- Progress Bar -->
+                    <div class="progress-bar absolute bottom-0 left-0 w-full">
+                        <div class="progress" id="slider-progress"></div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Categories Section -->
+        <section id="categories" class="py-20 bg-gray-50">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Browse by Category</h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    Find articles that match your interests and expand your knowledge in specific areas.
+                </p>
+
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-6">
+                    <a href="#"
+                        class="category-tag bg-blue-100 hover:bg-blue-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-blue-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-laptop-code text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-blue-800">Technology</h3>
+                        <p class="text-blue-600 text-sm mt-1">24 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-green-100 hover:bg-green-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-green-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-heartbeat text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-green-800">Health & Wellness</h3>
+                        <p class="text-green-600 text-sm mt-1">18 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-purple-100 hover:bg-purple-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-purple-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-brain text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-purple-800">Personal Growth</h3>
+                        <p class="text-purple-600 text-sm mt-1">21 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-yellow-100 hover:bg-yellow-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-yellow-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-chart-line text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-yellow-800">Business</h3>
+                        <p class="text-yellow-600 text-sm mt-1">16 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-red-100 hover:bg-red-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-red-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-utensils text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-red-800">Food & Cooking</h3>
+                        <p class="text-red-600 text-sm mt-1">14 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-indigo-100 hover:bg-indigo-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-indigo-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-plane-departure text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-indigo-800">Travel</h3>
+                        <p class="text-indigo-600 text-sm mt-1">19 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-teal-100 hover:bg-teal-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-teal-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-leaf text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-teal-800">Environment</h3>
+                        <p class="text-teal-600 text-sm mt-1">12 Articles</p>
+                    </a>
+
+                    <a href="#"
+                        class="category-tag bg-pink-100 hover:bg-pink-200 rounded-xl p-6 text-center transition-all">
+                        <div
+                            class="bg-pink-500 text-white rounded-full w-16 h-16 flex items-center justify-center mx-auto mb-4">
+                            <i class="fas fa-palette text-2xl"></i>
+                        </div>
+                        <h3 class="font-semibold text-lg text-pink-800">Arts & Culture</h3>
+                        <p class="text-pink-600 text-sm mt-1">15 Articles</p>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- Latest Articles -->
+        <section id="latest" class="py-20 bg-white">
+            <div class="container mx-auto px-4">
+                <h2 class="text-3xl md:text-4xl font-bold text-center mb-4">Latest Articles</h2>
+                <p class="text-gray-600 text-center mb-12 max-w-2xl mx-auto">
+                    Stay up-to-date with our most recent publications across all categories.
+                </p>
+
+                <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- Article Card 1 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Leadership Strategies" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span
+                                class="bg-yellow-100 text-yellow-800 text-xs font-semibold py-1 px-2 rounded-full">Business</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">5 Leadership Strategies to Inspire Your Team in 2025
+                            </h3>
+                            <p class="text-gray-600 mb-4">Discover innovative approaches to leadership that foster
+                                creativity, collaboration, and commitment in today's evolving workplace.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/45.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Sarah Johnson</p>
+                                        <p class="text-gray-500 text-xs">May 2, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 2 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1332&q=80"
+                            alt="Nutrition Plan" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span
+                                class="bg-green-100 text-green-800 text-xs font-semibold py-1 px-2 rounded-full">Health
+                                &
+                                Wellness</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">The Ultimate Guide to Personalized Nutrition Plans
+                            </h3>
+                            <p class="text-gray-600 mb-4">Learn how to develop a nutrition strategy tailored to your
+                                unique
+                                body composition, goals, and lifestyle preferences.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Robert Chen</p>
+                                        <p class="text-gray-500 text-xs">April 28, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 3 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1496171367470-9ed9a91ea931?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Remote Work" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span
+                                class="bg-blue-100 text-blue-800 text-xs font-semibold py-1 px-2 rounded-full">Technology</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Mastering Remote Work: Tools and Techniques for 2025
+                            </h3>
+                            <p class="text-gray-600 mb-4">Stay ahead of the curve with cutting-edge technology and
+                                productivity strategies for the evolving remote work landscape.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Jason Harper</p>
+                                        <p class="text-gray-500 text-xs">April 25, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 4 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1476304884326-cd2c88572c5f?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+                            alt="Mindful Travel" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span
+                                class="bg-indigo-100 text-indigo-800 text-xs font-semibold py-1 px-2 rounded-full">Travel</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">The Art of Mindful Travel: Beyond Tourist Traps</h3>
+                            <p class="text-gray-600 mb-4">Explore how intentional travel practices can transform your
+                                journeys from typical vacations to profound cultural experiences.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/63.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Elena Rodriguez</p>
+                                        <p class="text-gray-500 text-xs">April 22, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 5 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1564939558297-fc396f18e5c7?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1171&q=80"
+                            alt="Photography Skills" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span class="bg-pink-100 text-pink-800 text-xs font-semibold py-1 px-2 rounded-full">Arts &
+                                Culture</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Advanced Photography Techniques Anyone Can Master
+                            </h3>
+                            <p class="text-gray-600 mb-4">Elevate your photography skills with professional techniques
+                                that
+                                don't require expensive equipment—just creativity and vision.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/men/54.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Michael Kennedy</p>
+                                        <p class="text-gray-500 text-xs">April 19, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Article Card 6 -->
+                    <div class="card bg-white rounded-xl overflow-hidden shadow-lg">
+                        <img src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                            alt="Productivity Habits" class="w-full h-56 object-cover">
+                        <div class="p-6">
+                            <span
+                                class="bg-purple-100 text-purple-800 text-xs font-semibold py-1 px-2 rounded-full">Personal
+                                Growth</span>
+                            <h3 class="text-xl font-bold mt-4 mb-2">Building Productivity Habits That Actually Stick
+                            </h3>
+                            <p class="text-gray-600 mb-4">Create sustainable productivity systems based on behavioral
+                                science that work with your personality, not against it.</p>
+                            <div class="flex items-center justify-between">
+                                <div class="flex items-center">
+                                    <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Author"
+                                        class="w-10 h-10 rounded-full mr-3">
+                                    <div>
+                                        <p class="font-medium text-sm">Priya Sharma</p>
+                                        <p class="text-gray-500 text-xs">April 16, 2025</p>
+                                    </div>
+                                </div>
+                                <a href="article1-html.html" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-arrow-right"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Newsletter Section -->
+        <section class="newsletter-section py-20 text-white">
+            <div class="container mx-auto px-4">
+                <div class="max-w-3xl mx-auto text-center">
+                    <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Updated</h2>
+                    <p class="text-lg mb-8">Join our newsletter and get the latest insights delivered straight to your
+                        inbox.</p>
+
+                    <form class="flex flex-col md:flex-row gap-4">
+                        <input type="email" placeholder="Your email address"
+                            class="flex-grow py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-800">
+                        <button type="submit"
+                            class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300">
+                            Subscribe
+                        </button>
+                    </form>
+
+                    <p class="text-sm mt-4 opacity-80">We respect your privacy. Unsubscribe at any time.</p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <a href="index-html.html" class="text-2xl font-bold flex items-center mb-4">
+                        <i class="fas fa-feather-alt mr-2"></i>
+                        <span>Insight</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">Thought-provoking content to inspire your journey and
+                        expand your horizons.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index-html.html" class="text-gray-400 hover:text-white transition-colors">Home</a>
+                        </li>
+                        <li><a href="#featured" class="text-gray-400 hover:text-white transition-colors">Featured</a>
+                        </li>
+                        <li><a href="#categories"
+                                class="text-gray-400 hover:text-white transition-colors">Categories</a></li>
+                        <li><a href="about-html.html" class="text-gray-400 hover:text-white transition-colors">About
+                                Us</a>
+                        </li>
+                        <li><a href="contact-html.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Technology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Health &
+                                Wellness</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Personal
+                                Growth</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Environment</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
+                            <span class="text-gray-400">123 Innovation Street, Tech Valley, CA 94043</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:info@insightblog.com"
+                                class="text-gray-400 hover:text-white transition-colors">info@insightblog.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-blue-400"></i>
+                            <a href="tel:+1-555-123-4567"
+                                class="text-gray-400 hover:text-white transition-colors">+1-555-123-4567</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">&copy; 2025 Insight Blog. All rights reserved.</p>
+                <div class="flex mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Privacy
+                        Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Terms
+                        of Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Cookie
+                        Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+</body>
+
+</html>
