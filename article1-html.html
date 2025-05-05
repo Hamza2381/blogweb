@@ -1,0 +1,1266 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The AI Revolution: How Machine Learning is Transforming Our Future | Insight Blog</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.9.1/ScrollTrigger.min.js"></script>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Merriweather:wght@300;400;700&display=swap');
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            scroll-behavior: smooth;
+        }
+
+        .article-content {
+            font-family: 'Merriweather', serif;
+        }
+
+        .article-content p {
+            margin-bottom: 1.5rem;
+            line-height: 1.8;
+        }
+
+        .article-content h2 {
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            font-size: 1.75rem;
+        }
+
+        .article-content h3 {
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+            font-size: 1.5rem;
+        }
+
+        .article-content ul,
+        .article-content ol {
+            margin-bottom: 1.5rem;
+            padding-left: 1.25rem;
+            line-height: 1.8;
+        }
+
+        .article-content ul {
+            list-style-type: disc;
+        }
+
+        .article-content ol {
+            list-style-type: decimal;
+        }
+
+        .article-content a {
+            color: #2563eb;
+            text-decoration: underline;
+        }
+
+        .article-content a:hover {
+            color: #1d4ed8;
+        }
+
+        .article-content blockquote {
+            border-left: 4px solid #3b82f6;
+            padding-left: 1rem;
+            margin: 1.5rem 0;
+            font-style: italic;
+            color: #4b5563;
+        }
+
+        .article-content img {
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+        }
+
+        .article-content .image-caption {
+            text-align: center;
+            font-size: 0.875rem;
+            color: #6b7280;
+            margin-top: -1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .share-button {
+            transition: all 0.2s ease;
+        }
+
+        .share-button:hover {
+            transform: translateY(-3px);
+        }
+
+        .related-article {
+            transition: all 0.3s ease;
+        }
+
+        .related-article:hover {
+            transform: translateY(-5px);
+        }
+
+        .table-of-contents {
+            background-color: #f8fafc;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .table-of-contents ul {
+            list-style-type: none;
+            padding-left: 0;
+        }
+
+        .table-of-contents ul li {
+            margin-bottom: 0.5rem;
+        }
+
+        .table-of-contents a {
+            display: block;
+            padding: 0.25rem 0;
+            color: #334155;
+            text-decoration: none;
+            transition: all 0.2s ease;
+        }
+
+        .table-of-contents a:hover {
+            color: #2563eb;
+            padding-left: 0.25rem;
+        }
+
+        .progress-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 4px;
+            z-index: 100;
+        }
+
+        .progress-bar {
+            height: 100%;
+            background-color: #3b82f6;
+            width: 0%;
+        }
+
+        .highlight {
+            background-color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            margin: 2rem 0;
+            border-left: 4px solid #3b82f6;
+        }
+
+        code {
+            font-family: 'Courier New', monospace;
+            background-color: #f1f5f9;
+            padding: 0.125rem 0.25rem;
+            border-radius: 0.25rem;
+            font-size: 0.875em;
+        }
+
+        pre {
+            background-color: #1e293b;
+            color: #f8fafc;
+            padding: 1.5rem;
+            border-radius: 0.5rem;
+            overflow-x: auto;
+            margin: 1.5rem 0;
+        }
+
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            font-size: 0.875em;
+            color: inherit;
+        }
+    </style>
+    <!-- Scripts -->
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Mobile Menu Toggle
+            const menuToggle = document.getElementById('menu-toggle');
+            const mobileMenu = document.getElementById('mobile-menu');
+
+            menuToggle.addEventListener('click', function () {
+                mobileMenu.classList.toggle('hidden');
+            });
+
+            // Navbar Scroll Effect
+            const navbar = document.getElementById('navbar');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 100) {
+                    navbar.classList.add('py-2');
+                    navbar.classList.remove('py-4');
+                    navbar.classList.add('shadow-lg');
+                } else {
+                    navbar.classList.add('py-4');
+                    navbar.classList.remove('py-2');
+                    navbar.classList.remove('shadow-lg');
+                }
+            });
+
+            // Back to Top Button
+            const backToTopButton = document.getElementById('back-to-top');
+
+            window.addEventListener('scroll', function () {
+                if (window.scrollY > 500) {
+                    backToTopButton.classList.remove('opacity-0', 'invisible');
+                    backToTopButton.classList.add('opacity-100', 'visible');
+                } else {
+                    backToTopButton.classList.add('opacity-0', 'invisible');
+                    backToTopButton.classList.remove('opacity-100', 'visible');
+                }
+            });
+
+            backToTopButton.addEventListener('click', function () {
+                window.scrollTo({
+                    top: 0,
+                    behavior: 'smooth'
+                });
+            });
+
+            // Reading Progress Bar
+            const progressBar = document.getElementById('reading-progress');
+            const articleContent = document.querySelector('.article-content');
+            const totalHeight = articleContent.clientHeight;
+
+            window.addEventListener('scroll', function () {
+                const scrollTop = window.scrollY - articleContent.offsetTop;
+                const scrollPercentage = (scrollTop / totalHeight) * 100;
+
+                if (scrollPercentage >= 0 && scrollPercentage <= 100) {
+                    progressBar.style.width = scrollPercentage + '%';
+                } else if (scrollPercentage < 0) {
+                    progressBar.style.width = '0%';
+                } else {
+                    progressBar.style.width = '100%';
+                }
+            });
+
+            // Like Button Toggle
+            const likeButton = document.getElementById('like-button');
+            const likeCounter = document.getElementById('like-counter');
+            let isLiked = false;
+
+            likeButton.addEventListener('click', function () {
+                const currentLikes = parseInt(likeCounter.textContent);
+
+                if (isLiked) {
+                    likeCounter.textContent = currentLikes - 1;
+                    likeButton.innerHTML = '<i class="far fa-heart mr-2"></i> ' + (currentLikes - 1);
+                    likeButton.classList.remove('bg-red-100', 'text-red-600');
+                    likeButton.classList.add('bg-gray-100', 'text-gray-600');
+                } else {
+                    likeCounter.textContent = currentLikes + 1;
+                    likeButton.innerHTML = '<i class="fas fa-heart mr-2"></i> ' + (currentLikes + 1);
+                    likeButton.classList.remove('bg-gray-100', 'text-gray-600');
+                    likeButton.classList.add('bg-red-100', 'text-red-600');
+                }
+
+                isLiked = !isLiked;
+            });
+
+            // Bookmark Button Toggle
+            const bookmarkButton = document.getElementById('bookmark-button');
+            let isBookmarked = false;
+
+            bookmarkButton.addEventListener('click', function () {
+                if (isBookmarked) {
+                    bookmarkButton.innerHTML = '<i class="far fa-bookmark mr-2"></i> Save';
+                    bookmarkButton.classList.remove('bg-blue-100', 'text-blue-600');
+                    bookmarkButton.classList.add('bg-gray-100', 'text-gray-600');
+                } else {
+                    bookmarkButton.innerHTML = '<i class="fas fa-bookmark mr-2"></i> Saved';
+                    bookmarkButton.classList.remove('bg-gray-100', 'text-gray-600');
+                    bookmarkButton.classList.add('bg-blue-100', 'text-blue-600');
+                }
+
+                isBookmarked = !isBookmarked;
+            });
+        });
+    </script>
+</head>
+
+<body class="bg-gray-50">
+    <!-- Progress Bar -->
+    <div class="progress-container">
+        <div class="progress-bar" id="reading-progress"></div>
+    </div>
+
+    <!-- Navigation -->
+    <header class="fixed w-full bg-white shadow-md z-50 transition-all duration-300" id="navbar">
+        <div class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="index.html" class="text-3xl font-bold text-blue-600 flex items-center">
+                <i class="fas fa-feather-alt mr-2"></i>
+                <span>Insight</span>
+            </a>
+
+            <div class="hidden md:flex space-x-8">
+                <a href="index.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Home</a>
+                <a href="index.html#featured"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Featured</a>
+                <a href="index.html#categories"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Categories</a>
+                <a href="about-html.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">About Us</a>
+                <a href="contact-html.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Contact</a>
+            </div>
+
+            <div class="flex items-center space-x-4">
+                <div class="hidden md:block">
+                    <div class="relative">
+                        <input type="text" placeholder="Search articles..."
+                            class="py-2 px-4 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm w-64">
+                        <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                    </div>
+                </div>
+
+                <button class="md:hidden focus:outline-none" id="menu-toggle">
+                    <i class="fas fa-bars text-2xl text-gray-800"></i>
+                </button>
+            </div>
+        </div>
+
+        <!-- Mobile Menu -->
+        <div class="md:hidden bg-white shadow-inner py-4 px-4 hidden" id="mobile-menu">
+            <div class="flex flex-col space-y-4">
+                <a href="index.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Home</a>
+                <a href="index.html#featured"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Featured</a>
+                <a href="index.html#categories"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Categories</a>
+                <a href="about-html.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">About Us</a>
+                <a href="contact-html.html"
+                    class="text-gray-800 hover:text-blue-600 transition-colors duration-300 font-medium">Contact</a>
+                <div class="relative mt-2">
+                    <input type="text" placeholder="Search articles..."
+                        class="py-2 px-4 pl-10 rounded-full bg-gray-100 focus:outline-none focus:ring-2 focus:ring-blue-400 text-sm w-full">
+                    <i class="fas fa-search absolute left-3 top-3 text-gray-400"></i>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Article Header -->
+    <section class="pt-32 pb-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-4xl mx-auto">
+                <!-- Breadcrumb -->
+                <div class="flex items-center text-sm text-gray-500 mb-8">
+                    <a href="index.html" class="hover:text-blue-600">Home</a>
+                    <i class="fas fa-chevron-right mx-2 text-xs"></i>
+                    <a href="#" class="hover:text-blue-600">Technology</a>
+                    <i class="fas fa-chevron-right mx-2 text-xs"></i>
+                    <span class="text-gray-700">The AI Revolution</span>
+                </div>
+
+                <!-- Category Badge -->
+                <span
+                    class="bg-blue-100 text-blue-800 text-sm font-semibold py-1 px-3 rounded-full inline-block mb-4">Technology</span>
+
+                <!-- Article Title -->
+                <h1 class="text-4xl md:text-5xl font-bold text-gray-900 mb-4">
+                    The AI Revolution: How Machine Learning is Transforming Our Future
+                </h1>
+
+                <!-- Article Meta -->
+                <div class="flex justify-between items-center mb-8 py-4 border-t border-b border-gray-200">
+                    <div class="flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author"
+                            class="w-12 h-12 rounded-full mr-4">
+                        <div>
+                            <p class="font-medium text-gray-800">Marcus Johnson</p>
+                            <p class="text-gray-500 text-sm">Technology Editor</p>
+                        </div>
+                    </div>
+                    <div class="text-gray-500 text-sm flex items-center">
+                        <span class="mr-4"><i class="far fa-calendar-alt mr-1"></i> May 1, 2025</span>
+                        <span><i class="far fa-clock mr-1"></i> 12 min read</span>
+                    </div>
+                </div>
+
+                <!-- Featured Image -->
+                <div class="mb-8">
+                    <img src="https://images.unsplash.com/photo-1504639725590-34d0984388bd?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1074&q=80"
+                        alt="AI Revolution" class="w-full h-auto rounded-xl">
+                    <p class="text-center text-gray-500 text-sm mt-2">
+                        The rapid advancement of AI is reshaping industries and societies worldwide
+                    </p>
+                </div>
+
+                <!-- Share Buttons -->
+                <div class="flex space-x-3 mb-8 justify-center">
+                    <a href="#"
+                        class="share-button bg-blue-600 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-blue-700">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a href="#"
+                        class="share-button bg-blue-400 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-blue-500">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a href="#"
+                        class="share-button bg-blue-700 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-blue-800">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a href="#"
+                        class="share-button bg-green-500 text-white w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-green-600">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a href="#"
+                        class="share-button bg-gray-200 text-gray-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300 hover:bg-gray-300">
+                        <i class="fas fa-envelope"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <section class="py-12 bg-white">
+        <div class="container mx-auto px-4">
+            <div class="flex flex-col lg:flex-row max-w-6xl mx-auto">
+                <!-- Table of Contents Sidebar (Desktop) -->
+                <div class="hidden lg:block lg:w-1/4 pr-8">
+                    <div class="sticky top-28">
+                        <div class="table-of-contents">
+                            <h3 class="font-bold text-lg mb-4 text-gray-800">Table of Contents</h3>
+                            <ul>
+                                <li><a href="#introduction">Introduction</a></li>
+                                <li><a href="#history">A Brief History of AI</a></li>
+                                <li><a href="#current-state">The Current State of AI</a></li>
+                                <li><a href="#key-technologies">Key Technologies Driving AI</a></li>
+                                <li><a href="#industry-impact">AI's Impact Across Industries</a></li>
+                                <li><a href="#ethical-considerations">Ethical Considerations</a></li>
+                                <li><a href="#future">The Future of AI</a></li>
+                                <li><a href="#conclusion">Conclusion</a></li>
+                            </ul>
+                        </div>
+
+                        <div class="mt-8 text-center">
+                            <button id="like-button"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center justify-center w-full">
+                                <i class="far fa-heart mr-2"></i> <span id="like-counter">153</span>
+                            </button>
+
+                            <button id="bookmark-button"
+                                class="mt-3 bg-gray-100 hover:bg-gray-200 text-gray-600 font-medium py-2 px-4 rounded-full transition-colors duration-300 flex items-center justify-center w-full">
+                                <i class="far fa-bookmark mr-2"></i> Save
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Article Content -->
+                <div class="lg:w-3/4">
+                    <div class="article-content text-gray-800 leading-relaxed">
+                        <!-- Introduction -->
+                        <div id="introduction">
+                            <p>
+                                Artificial Intelligence (AI) is no longer a concept confined to science fiction or
+                                academic research labs. It's now an integral part of our daily lives, influencing how we
+                                work, communicate, travel, and even how we receive healthcare. The rapid advancement of
+                                machine learning algorithms, coupled with the exponential growth in computing power and
+                                data availability, has propelled AI into a transformative force reshaping our world.
+                            </p>
+
+                            <p>
+                                In this article, we'll explore the current state of AI technology, examine its profound
+                                impact across various industries, and consider the ethical implications and future
+                                directions of this revolutionary technology. As we stand at the precipice of what many
+                                experts call the "Fourth Industrial Revolution," understanding the capabilities,
+                                limitations, and potential trajectory of AI becomes increasingly important for
+                                everyone—from business leaders and policymakers to consumers and citizens.
+                            </p>
+                        </div>
+
+                        <!-- History -->
+                        <h2 id="history">A Brief History of AI</h2>
+                        <p>
+                            The concept of artificial intelligence has roots dating back to ancient myths and stories of
+                            mechanical beings endowed with intelligence or consciousness. However, modern AI research is
+                            generally considered to have begun in the 1950s, when the term "artificial intelligence" was
+                            coined at the Dartmouth Conference in 1956.
+                        </p>
+
+                        <p>
+                            The early decades of AI research were characterized by cycles of optimism followed by
+                            periods of reduced funding and interest, known as "AI winters." Early approaches focused on
+                            symbolic methods and rule-based systems, which showed promise in controlled environments but
+                            struggled with the complexity and ambiguity of real-world problems.
+                        </p>
+
+                        <p>
+                            The true breakthrough came with the rise of machine learning approaches in the 1990s and
+                            2000s, particularly neural networks and deep learning algorithms. These approaches, which
+                            mimic the structure and function of the human brain, proved remarkably effective at pattern
+                            recognition tasks when trained on large datasets.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1488229297570-58520851e868?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+                            alt="Neural Network Visualization" class="w-full h-auto">
+                        <p class="image-caption">
+                            Visual representation of a neural network, the foundational architecture behind modern deep
+                            learning
+                        </p>
+
+                        <p>
+                            The last decade has witnessed an unprecedented acceleration in AI capabilities, driven by
+                            three key factors: the availability of massive datasets, significant increases in computing
+                            power, and algorithmic innovations. This convergence has enabled breakthroughs in areas that
+                            were previously considered extremely challenging for machines, including natural language
+                            processing, computer vision, and complex decision-making tasks.
+                        </p>
+
+                        <!-- Current State -->
+                        <h2 id="current-state">The Current State of AI</h2>
+                        <p>
+                            Today's AI landscape is dominated by machine learning approaches, particularly deep
+                            learning. These systems excel at finding patterns in large datasets and making predictions
+                            or decisions based on those patterns. Some of the most impressive recent achievements
+                            include:
+                        </p>
+
+                        <ul>
+                            <li>Large language models capable of generating human-like text, translating between
+                                languages, and even writing creative content</li>
+                            <li>Computer vision systems that can identify objects, analyze medical images, and enable
+                                autonomous vehicles</li>
+                            <li>AI systems that have mastered complex games like Go, chess, and StarCraft II, often
+                                developing novel strategies that surprise human experts</li>
+                            <li>Voice assistants and conversational AI that can understand and respond to natural
+                                language commands and queries</li>
+                            <li>Recommendation systems that power content discovery on streaming platforms, e-commerce
+                                sites, and social media</li>
+                        </ul>
+
+                        <div class="highlight">
+                            <h3 class="font-bold text-gray-900 mb-2">Key Insight</h3>
+                            <p class="m-0">
+                                Modern AI systems are increasingly moving beyond narrow, specialized tasks toward more
+                                general capabilities. While we're still far from human-level general intelligence,
+                                today's AI can perform a much wider range of tasks than was possible just a few years
+                                ago.
+                            </p>
+                        </div>
+
+                        <p>
+                            Despite these impressive advances, today's AI systems still have significant limitations.
+                            They require large amounts of data to train, can struggle with novel situations not
+                            represented in their training data, and often lack common sense reasoning abilities that
+                            humans take for granted. They can also inherit and amplify biases present in their training
+                            data, leading to concerns about fairness and discrimination.
+                        </p>
+
+                        <!-- Key Technologies -->
+                        <h2 id="key-technologies">Key Technologies Driving AI</h2>
+                        <p>
+                            Several key technologies and methodologies are powering the current AI revolution:
+                        </p>
+
+                        <h3>Deep Learning</h3>
+                        <p>
+                            Deep learning is a subset of machine learning that uses neural networks with many layers
+                            (hence "deep") to analyze various factors of data. These neural networks are designed to
+                            mimic the way the human brain works, with interconnected nodes that process and pass
+                            information to subsequent layers.
+                        </p>
+
+                        <h3>Transformer Models</h3>
+                        <p>
+                            Transformer architecture has revolutionized natural language processing. Models like
+                            OpenAI's GPT series, Google's BERT, and Meta's LLaMA use attention mechanisms to process
+                            entire sequences of text simultaneously rather than sequentially, enabling more efficient
+                            training and better understanding of context.
+                        </p>
+
+                        <h3>Reinforcement Learning</h3>
+                        <p>
+                            Reinforcement learning involves training algorithms to make sequences of decisions by
+                            rewarding desired behaviors and punishing undesired ones. This approach has been
+                            particularly successful in gaming, robotics, and resource management problems.
+                        </p>
+
+                        <h3>Computer Vision</h3>
+                        <p>
+                            Computer vision technologies enable machines to derive meaningful information from digital
+                            images and videos. Convolutional Neural Networks (CNNs) have been particularly effective for
+                            image recognition tasks, enabling applications from facial recognition to medical imaging
+                            analysis.
+                        </p>
+
+                        <h3>Generative AI</h3>
+                        <p>
+                            Generative models like GANs (Generative Adversarial Networks) and diffusion models can
+                            create new content, including images, music, and videos that look and sound like they were
+                            created by humans. This has opened up new possibilities in creative fields while also
+                            raising concerns about deepfakes and misinformation.
+                        </p>
+
+                        <pre><code>// Example of a simple neural network in JavaScript
+class NeuralNetwork {
+  constructor(inputNodes, hiddenNodes, outputNodes) {
+    this.inputNodes = inputNodes;
+    this.hiddenNodes = hiddenNodes;
+    this.outputNodes = outputNodes;
+    
+    // Initialize weights and biases
+    this.weightsIH = new Matrix(this.hiddenNodes, this.inputNodes);
+    this.weightsHO = new Matrix(this.outputNodes, this.hiddenNodes);
+    this.weightsIH.randomize();
+    this.weightsHO.randomize();
+    
+    this.biasH = new Matrix(this.hiddenNodes, 1);
+    this.biasO = new Matrix(this.outputNodes, 1);
+    this.biasH.randomize();
+    this.biasO.randomize();
+    this.learningRate = 0.1;
+  }
+  
+  // Feed forward algorithm
+  predict(inputArray) {
+    // Convert input array to matrix
+    let inputs = Matrix.fromArray(inputArray);
+    
+    // Hidden layer calculations
+    let hidden = Matrix.multiply(this.weightsIH, inputs);
+    hidden.add(this.biasH);
+    hidden.map(sigmoid);
+    
+    // Output layer calculations
+    let output = Matrix.multiply(this.weightsHO, hidden);
+    output.add(this.biasO);
+    output.map(sigmoid);
+    
+    return output.toArray();
+  }
+}
+
+// Activation function
+function sigmoid(x) {
+  return 1 / (1 + Math.exp(-x));
+}</code></pre>
+
+                        <!-- Industry Impact -->
+                        <h2 id="industry-impact">AI's Impact Across Industries</h2>
+                        <p>
+                            AI is having a transformative effect on virtually every industry:
+                        </p>
+
+                        <h3>Healthcare</h3>
+                        <p>
+                            AI is revolutionizing healthcare through improved diagnostic accuracy, drug discovery,
+                            personalized treatment plans, and operational efficiency. Machine learning algorithms can
+                            identify patterns in medical images that might be missed by human eyes, potentially
+                            detecting diseases earlier and with greater accuracy. AI-powered robotic surgery systems are
+                            enhancing surgical precision and reducing recovery times.
+                        </p>
+
+                        <h3>Transportation</h3>
+                        <p>
+                            Self-driving vehicles represent one of the most visible applications of AI, but the
+                            technology is also optimizing traffic flows, reducing fuel consumption, and improving safety
+                            across various modes of transportation. AI-driven predictive maintenance is helping to
+                            identify potential equipment failures before they occur, reducing downtime and extending the
+                            lifespan of vehicles and infrastructure.
+                        </p>
+
+                        <img src="https://images.unsplash.com/photo-1553077738-2aa9ba96da2c?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                            alt="Self-driving car" class="w-full h-auto">
+                        <p class="image-caption">
+                            Autonomous vehicles rely on a combination of AI technologies including computer vision and
+                            reinforcement learning
+                        </p>
+
+                        <h3>Financial Services</h3>
+                        <p>
+                            Banks and financial institutions are using AI for fraud detection, algorithmic trading,
+                            credit scoring, and customer service. Chatbots and virtual assistants are handling routine
+                            customer inquiries, while advanced algorithms are identifying suspicious transactions in
+                            real-time, helping to prevent fraud and money laundering.
+                        </p>
+
+                        <h3>Manufacturing</h3>
+                        <p>
+                            AI-powered robots and computer vision systems are automating production lines, performing
+                            quality control, and optimizing supply chains. Predictive maintenance algorithms are
+                            reducing downtime by identifying potential equipment failures before they occur, while
+                            digital twins (virtual replicas of physical systems) are enabling more efficient design and
+                            testing processes.
+                        </p>
+
+                        <h3>Retail</h3>
+                        <p>
+                            Retailers are leveraging AI for personalized shopping experiences, inventory management,
+                            demand forecasting, and customer service. Recommendation systems are suggesting products
+                            based on individual preferences and behavior, while computer vision systems are enabling
+                            cashierless stores and helping to prevent theft.
+                        </p>
+
+                        <blockquote>
+                            "AI is not just another technology. It's a fundamental shift in how we interact with and
+                            understand the world, similar to the introduction of electricity or the internet." — Sundar
+                            Pichai, CEO of Google
+                        </blockquote>
+
+                        <!-- Ethical Considerations -->
+                        <h2 id="ethical-considerations">Ethical Considerations</h2>
+                        <p>
+                            The rapid advancement of AI brings with it a host of ethical concerns that society must
+                            address:
+                        </p>
+
+                        <h3>Privacy and Surveillance</h3>
+                        <p>
+                            AI systems often rely on vast amounts of personal data, raising concerns about privacy and
+                            surveillance. Facial recognition technology, in particular, has sparked debates about
+                            appropriate use cases and potential misuse by governments or corporations.
+                        </p>
+
+                        <h3>Bias and Fairness</h3>
+                        <p>
+                            AI systems can inherit and amplify biases present in their training data, potentially
+                            leading to unfair or discriminatory outcomes. This is particularly concerning in high-stakes
+                            domains like criminal justice, lending, and hiring.
+                        </p>
+
+                        <h3>Job Displacement</h3>
+                        <p>
+                            While AI has the potential to create new jobs and industries, it is also automating tasks
+                            previously performed by humans, raising concerns about unemployment and economic inequality.
+                        </p>
+
+                        <h3>Transparency and Explainability</h3>
+                        <p>
+                            Many modern AI systems, particularly deep learning models, operate as "black boxes," making
+                            decisions in ways that are difficult for humans to understand. This lack of transparency
+                            raises concerns about accountability and the ability to detect and correct errors or biases.
+                        </p>
+
+                        <h3>Autonomous Weapons</h3>
+                        <p>
+                            The development of AI-powered autonomous weapons systems raises profound ethical questions
+                            about human control, responsibility, and the potential for unintended escalation in conflict
+                            situations.
+                        </p>
+
+                        <div class="highlight">
+                            <h3 class="font-bold text-gray-900 mb-2">Expert Perspective</h3>
+                            <p class="m-0">
+                                According to AI ethics researcher Dr. Timnit Gebru, "We need to shift the focus from
+                                what AI can do to what it should do, and ensure that the benefits of these technologies
+                                are broadly shared and their risks are carefully managed."
+                            </p>
+                        </div>
+
+                        <!-- Future -->
+                        <h2 id="future">The Future of AI</h2>
+                        <p>
+                            Looking ahead, several trends and developments are likely to shape the future of AI:
+                        </p>
+
+                        <h3>Multimodal AI</h3>
+                        <p>
+                            Future AI systems will increasingly integrate different types of data and sensory inputs,
+                            combining text, images, audio, and potentially touch or smell to develop a more
+                            comprehensive understanding of the world.
+                        </p>
+
+                        <h3>AI for Scientific Discovery</h3>
+                        <p>
+                            AI is increasingly being applied to accelerate scientific discovery in fields like materials
+                            science, drug development, and climate modeling. Systems like AlphaFold, which can predict
+                            protein structures with remarkable accuracy, demonstrate the potential for AI to tackle
+                            complex scientific challenges.
+                        </p>
+
+                        <h3>Edge AI</h3>
+                        <p>
+                            As AI models become more efficient, they are increasingly being deployed on edge devices
+                            like smartphones, IoT devices, and wearables, reducing latency and addressing privacy
+                            concerns by processing data locally rather than in the cloud.
+                        </p>
+
+                        <h3>AI Governance</h3>
+                        <p>
+                            Developing appropriate governance frameworks for AI is a growing priority for governments,
+                            corporations, and civil society organizations. These frameworks aim to maximize the benefits
+                            of AI while mitigating risks related to safety, security, privacy, and fairness.
+                        </p>
+
+                        <h3>Human-AI Collaboration</h3>
+                        <p>
+                            Rather than replacing humans entirely, many future AI applications will focus on augmenting
+                            human capabilities and enabling new forms of collaboration between humans and machines. This
+                            approach leverages the complementary strengths of human intuition and creativity with AI's
+                            computational power and pattern recognition abilities.
+                        </p>
+
+                        <!-- Conclusion -->
+                        <h2 id="conclusion">Conclusion</h2>
+                        <p>
+                            The AI revolution is well underway, transforming industries, reshaping societies, and
+                            challenging our understanding of what machines can do. While current AI systems still have
+                            significant limitations compared to human intelligence, their capabilities are expanding
+                            rapidly, opening up new possibilities while also raising important ethical and governance
+                            questions.
+                        </p>
+
+                        <p>
+                            As we navigate this technological transition, it's crucial that we approach AI development
+                            with thoughtfulness and foresight, ensuring that these powerful tools are aligned with human
+                            values and broadly beneficial to society. By fostering interdisciplinary collaboration,
+                            inclusive stakeholder engagement, and proactive governance approaches, we can work to shape
+                            an AI future that enhances human flourishing and addresses our most pressing challenges.
+                        </p>
+
+                        <p>
+                            Whether you're a technology professional, business leader, policymaker, or simply a curious
+                            observer, understanding the capabilities, limitations, and implications of AI will be
+                            increasingly important in the years ahead. The AI revolution is not just a technological
+                            transformation but a societal one—and we all have a role to play in steering it toward
+                            positive outcomes.
+                        </p>
+                    </div>
+
+                    <!-- Author Bio -->
+                    <div class="bg-gray-50 rounded-xl p-6 mt-12 flex items-center">
+                        <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author"
+                            class="w-20 h-20 rounded-full mr-6">
+                        <div>
+                            <h3 class="font-bold text-lg text-gray-800 mb-1">About Marcus Johnson</h3>
+                            <p class="text-gray-600 mb-2">
+                                Marcus Johnson is the Technology Editor at Insight Blog. A former software engineer and
+                                tech entrepreneur, he specializes in making complex technological concepts accessible to
+                                a broad audience.
+                            </p>
+                            <div class="flex space-x-3">
+                                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fab fa-twitter"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </a>
+                                <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                    <i class="fas fa-globe"></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Tags -->
+                    <div class="mt-8">
+                        <div class="flex flex-wrap gap-2">
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Artificial
+                                Intelligence</a>
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Machine
+                                Learning</a>
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Deep
+                                Learning</a>
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Technology</a>
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Future
+                                of Work</a>
+                            <a href="#"
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 py-1 px-3 rounded-full text-sm transition-colors duration-300">Ethics</a>
+                        </div>
+                    </div>
+
+                    <!-- Comments Section -->
+                    <div class="mt-16">
+                        <h3 class="text-2xl font-bold text-gray-800 mb-8">Comments (24)</h3>
+
+                        <!-- Comment Form -->
+                        <div class="bg-gray-50 rounded-xl p-6 mb-8">
+                            <h4 class="font-semibold text-gray-800 mb-4">Leave a Comment</h4>
+                            <form class="space-y-4">
+                                <div class="grid md:grid-cols-2 gap-4">
+                                    <div>
+                                        <label for="comment-name"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Name</label>
+                                        <input type="text" id="comment-name"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                    <div>
+                                        <label for="comment-email"
+                                            class="block text-sm font-medium text-gray-700 mb-1">Email</label>
+                                        <input type="email" id="comment-email"
+                                            class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500">
+                                    </div>
+                                </div>
+                                <div>
+                                    <label for="comment-body"
+                                        class="block text-sm font-medium text-gray-700 mb-1">Comment</label>
+                                    <textarea id="comment-body" rows="4"
+                                        class="w-full px-4 py-2 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"></textarea>
+                                </div>
+                                <div class="flex items-center">
+                                    <input type="checkbox" id="comment-notify"
+                                        class="rounded text-blue-600 focus:ring-blue-500 h-4 w-4">
+                                    <label for="comment-notify" class="ml-2 text-sm text-gray-600">
+                                        Notify me of follow-up comments
+                                    </label>
+                                </div>
+                                <button type="submit"
+                                    class="bg-blue-600 hover:bg-blue-700 text-white font-medium py-2 px-6 rounded-lg transition-colors duration-300">
+                                    Post Comment
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Comments List -->
+                        <div class="space-y-8">
+                            <!-- Comment 1 -->
+                            <div class="border-b border-gray-200 pb-8">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Commenter"
+                                            class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h5 class="font-bold text-gray-800">Sarah Thompson</h5>
+                                            <p class="text-gray-500 text-sm">April 30, 2025 • 2:45 PM</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                                <p class="text-gray-700 mb-3">
+                                    Excellent article! The section on ethical considerations is particularly thoughtful.
+                                    I'd be interested in a deeper exploration of how AI governance frameworks might
+                                    evolve across different cultural and political contexts. Are we heading toward
+                                    global standards or fragmented approaches?
+                                </p>
+                                <div class="flex items-center space-x-4">
+                                    <button class="text-gray-500 hover:text-blue-600 flex items-center">
+                                        <i class="far fa-thumbs-up mr-1"></i> <span>15</span>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-blue-600">
+                                        Reply
+                                    </button>
+                                </div>
+
+                                <!-- Reply to Comment 1 -->
+                                <div class="ml-12 mt-6 pl-6 border-l-2 border-gray-200">
+                                    <div class="flex justify-between items-start mb-4">
+                                        <div class="flex items-center">
+                                            <img src="https://randomuser.me/api/portraits/men/75.jpg" alt="Author"
+                                                class="w-10 h-10 rounded-full mr-3">
+                                            <div>
+                                                <h5 class="font-bold text-gray-800">Marcus Johnson <span
+                                                        class="bg-blue-100 text-blue-600 text-xs py-1 px-2 rounded ml-2">Author</span>
+                                                </h5>
+                                                <p class="text-gray-500 text-sm">May 1, 2025 • 9:12 AM</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <p class="text-gray-700 mb-3">
+                                        Thanks for your thoughtful comment, Sarah! You raise an excellent point about
+                                        governance across different contexts. I'm working on a follow-up piece that
+                                        explores exactly this tension between global standards and regional approaches.
+                                        The EU's AI Act and China's regulatory framework offer interesting contrasting
+                                        case studies.
+                                    </p>
+                                    <div class="flex items-center space-x-4">
+                                        <button class="text-gray-500 hover:text-blue-600 flex items-center">
+                                            <i class="far fa-thumbs-up mr-1"></i> <span>8</span>
+                                        </button>
+                                        <button class="text-gray-500 hover:text-blue-600">
+                                            Reply
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Comment 2 -->
+                            <div class="border-b border-gray-200 pb-8">
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Commenter"
+                                            class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h5 class="font-bold text-gray-800">Michael Chen</h5>
+                                            <p class="text-gray-500 text-sm">April 30, 2025 • 5:18 PM</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                                <p class="text-gray-700 mb-3">
+                                    I work in healthcare AI, and I'd add that one of the biggest challenges we face is
+                                    integrating these systems with existing healthcare workflows and infrastructure. The
+                                    technology is advancing quickly, but adoption often lags because of these
+                                    integration challenges and regulatory hurdles.
+                                </p>
+                                <div class="flex items-center space-x-4">
+                                    <button class="text-gray-500 hover:text-blue-600 flex items-center">
+                                        <i class="far fa-thumbs-up mr-1"></i> <span>21</span>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-blue-600">
+                                        Reply
+                                    </button>
+                                </div>
+                            </div>
+
+                            <!-- Comment 3 -->
+                            <div>
+                                <div class="flex justify-between items-start mb-4">
+                                    <div class="flex items-center">
+                                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Commenter"
+                                            class="w-10 h-10 rounded-full mr-3">
+                                        <div>
+                                            <h5 class="font-bold text-gray-800">Elena Rodriguez</h5>
+                                            <p class="text-gray-500 text-sm">May 1, 2025 • 11:36 AM</p>
+                                        </div>
+                                    </div>
+                                    <button class="text-gray-400 hover:text-gray-600">
+                                        <i class="fas fa-ellipsis-v"></i>
+                                    </button>
+                                </div>
+                                <p class="text-gray-700 mb-3">
+                                    The discussion about job displacement is important, but I think we need to broaden
+                                    it beyond just job losses. AI is changing the nature of work itself—what skills are
+                                    valued, how work is organized, and how it's compensated. My team has already seen
+                                    significant shifts in what companies look for in employees. Adaptability and the
+                                    ability to work alongside AI systems are becoming essential skills across
+                                    industries.
+                                </p>
+                                <div class="flex items-center space-x-4">
+                                    <button class="text-gray-500 hover:text-blue-600 flex items-center">
+                                        <i class="far fa-thumbs-up mr-1"></i> <span>13</span>
+                                    </button>
+                                    <button class="text-gray-500 hover:text-blue-600">
+                                        Reply
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- View More Comments Button -->
+                        <div class="mt-8 text-center">
+                            <button
+                                class="bg-gray-100 hover:bg-gray-200 text-gray-800 font-medium py-3 px-6 rounded-lg transition-colors duration-300">
+                                View More Comments
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Related Articles -->
+    <section class="py-16 bg-gray-50">
+        <div class="container mx-auto px-4">
+            <h2 class="text-3xl font-bold text-center mb-12 text-gray-800">Related Articles</h2>
+
+            <div class="grid md:grid-cols-3 gap-8">
+                <!-- Related Article 1 -->
+                <div class="related-article bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Future of Work" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span
+                            class="bg-blue-100 text-blue-800 text-xs font-semibold py-1 px-2 rounded-full">Technology</span>
+                        <h3 class="text-xl font-bold mt-3 mb-2 text-gray-800">The Future of Work: Humans and AI
+                            Collaboration</h3>
+                        <p class="text-gray-600 mb-4">Explore how AI is transforming workplace dynamics and creating new
+                            opportunities for human-machine partnerships.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/women/33.jpg" alt="Author"
+                                    class="w-8 h-8 rounded-full mr-2">
+                                <p class="text-sm text-gray-500">Priya Sharma</p>
+                            </div>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Article 2 -->
+                <div class="related-article bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1507146153580-69a1fe6d8aa1?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1170&q=80"
+                        alt="Ethical AI" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span
+                            class="bg-purple-100 text-purple-800 text-xs font-semibold py-1 px-2 rounded-full">Ethics</span>
+                        <h3 class="text-xl font-bold mt-3 mb-2 text-gray-800">Building Ethical AI: Principles for
+                            Responsible Development</h3>
+                        <p class="text-gray-600 mb-4">A comprehensive guide to the ethical frameworks and best practices
+                            shaping responsible AI development.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/men/42.jpg" alt="Author"
+                                    class="w-8 h-8 rounded-full mr-2">
+                                <p class="text-sm text-gray-500">James Wilson</p>
+                            </div>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Related Article 3 -->
+                <div class="related-article bg-white rounded-xl overflow-hidden shadow-lg">
+                    <img src="https://images.unsplash.com/photo-1573164713988-8665fc963095?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1169&q=80"
+                        alt="AI Healthcare" class="w-full h-48 object-cover">
+                    <div class="p-6">
+                        <span
+                            class="bg-green-100 text-green-800 text-xs font-semibold py-1 px-2 rounded-full">Healthcare</span>
+                        <h3 class="text-xl font-bold mt-3 mb-2 text-gray-800">AI in Medicine: Breakthroughs and
+                            Challenges</h3>
+                        <p class="text-gray-600 mb-4">How artificial intelligence is revolutionizing diagnosis,
+                            treatment, and drug discovery in healthcare.</p>
+                        <div class="flex justify-between items-center">
+                            <div class="flex items-center">
+                                <img src="https://randomuser.me/api/portraits/women/42.jpg" alt="Author"
+                                    class="w-8 h-8 rounded-full mr-2">
+                                <p class="text-sm text-gray-500">Olivia Martinez</p>
+                            </div>
+                            <a href="#" class="text-blue-600 hover:text-blue-800 transition-colors">
+                                <i class="fas fa-arrow-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Newsletter Section -->
+    <section class="newsletter-section py-20 text-white">
+        <div class="container mx-auto px-4">
+            <div class="max-w-3xl mx-auto text-center">
+                <h2 class="text-3xl md:text-4xl font-bold mb-4">Stay Updated on AI Trends</h2>
+                <p class="text-lg mb-8">Join our newsletter for the latest insights, analysis, and breakthroughs in
+                    artificial intelligence and technology.</p>
+
+                <form class="flex flex-col md:flex-row gap-4">
+                    <input type="email" placeholder="Your email address"
+                        class="flex-grow py-3 px-4 rounded-lg focus:outline-none focus:ring-2 focus:ring-white text-gray-800">
+                    <button type="submit"
+                        class="bg-white text-blue-600 hover:bg-gray-100 font-bold py-3 px-8 rounded-lg transition-all duration-300">
+                        Subscribe
+                    </button>
+                </form>
+
+                <p class="text-sm mt-4 opacity-80">We respect your privacy. Unsubscribe at any time.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-gray-900 text-white py-16">
+        <div class="container mx-auto px-4">
+            <div class="grid md:grid-cols-4 gap-8">
+                <div>
+                    <a href="index.html" class="text-2xl font-bold flex items-center mb-4">
+                        <i class="fas fa-feather-alt mr-2"></i>
+                        <span>Insight</span>
+                    </a>
+                    <p class="text-gray-400 mb-6">Thought-provoking content to inspire your journey and expand your
+                        horizons.</p>
+                    <div class="flex space-x-4">
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-400 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-twitter"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-pink-600 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#"
+                            class="bg-gray-800 hover:bg-blue-800 w-10 h-10 rounded-full flex items-center justify-center transition-colors duration-300">
+                            <i class="fab fa-linkedin-in"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Quick Links</h3>
+                    <ul class="space-y-2">
+                        <li><a href="index.html" class="text-gray-400 hover:text-white transition-colors">Home</a></li>
+                        <li><a href="index.html#featured"
+                                class="text-gray-400 hover:text-white transition-colors">Featured</a></li>
+                        <li><a href="index.html#categories"
+                                class="text-gray-400 hover:text-white transition-colors">Categories</a></li>
+                        <li><a href="about-html.html" class="text-gray-400 hover:text-white transition-colors">About Us</a>
+                        </li>
+                        <li><a href="contact-html.html" class="text-gray-400 hover:text-white transition-colors">Contact</a>
+                        </li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Categories</h3>
+                    <ul class="space-y-2">
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Technology</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Health & Wellness</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Personal Growth</a>
+                        </li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Business</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-white transition-colors">Environment</a></li>
+                    </ul>
+                </div>
+
+                <div>
+                    <h3 class="font-semibold text-lg mb-4">Contact Us</h3>
+                    <ul class="space-y-3">
+                        <li class="flex items-start">
+                            <i class="fas fa-map-marker-alt mt-1 mr-3 text-blue-400"></i>
+                            <span class="text-gray-400">123 Innovation Street, Tech Valley, CA 94043</span>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-envelope mr-3 text-blue-400"></i>
+                            <a href="mailto:info@insightblog.com"
+                                class="text-gray-400 hover:text-white transition-colors">info@insightblog.com</a>
+                        </li>
+                        <li class="flex items-center">
+                            <i class="fas fa-phone-alt mr-3 text-blue-400"></i>
+                            <a href="tel:+1-555-123-4567"
+                                class="text-gray-400 hover:text-white transition-colors">+1-555-123-4567</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-500 text-sm">&copy; 2025 Insight Blog. All rights reserved.</p>
+                <div class="flex mt-4 md:mt-0">
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Privacy Policy</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Terms of
+                        Service</a>
+                    <a href="#" class="text-gray-500 hover:text-white text-sm mx-3 transition-colors">Cookie Policy</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Back to Top Button -->
+    <button id="back-to-top"
+        class="fixed bottom-8 right-8 bg-blue-600 text-white w-12 h-12 rounded-full flex items-center justify-center shadow-lg cursor-pointer opacity-0 invisible transition-all duration-300">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+</body>
